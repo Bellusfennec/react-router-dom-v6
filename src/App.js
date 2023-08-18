@@ -12,14 +12,16 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route index element={<HomePage />} />
-        <Route path="users" element={<UsersLayout />}>
-          <Route index element={<UsersListPage />} />
-          <Route path=":userId">
-            <Route index element={<Navigate to="profile" />} />
-            <Route path="*" element={<Navigate to="profile" />} />
-            <Route path="profile" element={<UserProfilePage />} />
-            <Route path="edit" element={<UserEditPage />} />
+        <Route path="/" element={<AppLayout />}>
+          <Route index element={<HomePage />} />
+          <Route path="users" element={<UsersLayout />}>
+            <Route index element={<UsersListPage />} />
+            <Route path=":userId">
+              <Route index element={<Navigate to="profile" />} />
+              <Route path="*" element={<Navigate to="profile" />} />
+              <Route path="profile" element={<UserProfilePage />} />
+              <Route path="edit" element={<UserEditPage />} />
+            </Route>
           </Route>
         </Route>
         <Route path="*" element={<Navigate to="/" />} />
@@ -31,6 +33,11 @@ function AppLayout() {
   return (
     <>
       <h1>App Layout</h1>
+      <ul>
+        <li>
+          <Link to="/users">Users List</Link>
+        </li>
+      </ul>
       <Outlet />
     </>
   );
@@ -39,7 +46,6 @@ function HomePage() {
   return (
     <>
       <h1>Home</h1>
-      <Link to="/users">Users List</Link>
     </>
   );
 }
